@@ -5,12 +5,15 @@ const port = process.env.PORT || 3001;
 require('dotenv').config();
 console.log(process.env.DATASOURCE);
 const apiRouters = require('./router');
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json())
+
+app.use('/api', cors(), apiRouters);
 
 const public = path.resolve(__dirname, 'public');
 app.use(express.static(public));
